@@ -42,4 +42,5 @@ def get_companhia(id: UUID, db: Session = Depends(get_db)):
 
     if not companhia:
         raise HTTPException(status_code=404, detail="Companhia não encontrada")
+
     return companhia
