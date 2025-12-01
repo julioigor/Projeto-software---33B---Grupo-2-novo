@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Connexion - Plataforma de Problemas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <main class="auth-page">
+    <section class="auth-card">
+      <h1>Plataforma Cidadã</h1>
+      <p class="auth-subtitle">
+        Connecte-toi pour signaler et suivre les problèmes de ta ville.
+      </p>
+
+      <form id="login-form" class="auth-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="ton.email@exemple.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="********"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn-primary">Se connecter</button>
+
+        <p id="message" class="message" aria-live="polite"></p>
+      </form>
+
+      <p class="auth-footer">
+        Pas encore de compte ?
+        <a href="#" onclick="alert('Écran de création de compte à venir 😄'); return false;">
+          Créer un compte
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <!-- logique de la page -->
+  <script src="/js/connexion.js"></script>
+</body>
+</html>

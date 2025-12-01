@@ -4,7 +4,8 @@ from .views import (
     criar_usuario, obter_usuario,
     criar_servico, obter_servico,
     criar_localizacao, obter_localizacao,
-    criar_problema, obter_problema
+    criar_problema, obter_problema, login_usuario,
+    listar_problemas
 )
 
 urlpatterns = [
@@ -27,4 +28,8 @@ urlpatterns = [
     # PROBLEMAS
     path("problemas/", criar_problema),
     path("problemas/<uuid:problema_id>/", obter_problema),
+    path("problemas/listar/", listar_problemas, name="listar_problemas"),
+    
+    #LOGIN
+    path("api/login/", login_usuario, name="login_usuario"),
 ]

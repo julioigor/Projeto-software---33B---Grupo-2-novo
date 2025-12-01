@@ -23,7 +23,7 @@ Virtualenv recomendado
 🛠 2. Instalação
 macOS / Linux
 cd backend
-python3 -m venv .venv
+c
 source .venv/bin/activate
 pip install --upgrade pip
 pip install django

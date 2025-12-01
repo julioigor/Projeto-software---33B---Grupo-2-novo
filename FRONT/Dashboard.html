@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard - Plataforma Cidadã</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <main class="dashboard-page">
+    <header class="dashboard-header">
+      <h1>Plataforma Cidadã</h1>
+      <button id="logout-btn" class="btn-secondary">Se déconnecter</button>
+    </header>
+
+    <section class="dashboard-card">
+      <h2>Bienvenue, <span id="user-name"></span> 👋</h2>
+      <p id="user-info"></p>
+
+      <div id="company-block" class="company-block">
+        <h3>Votre ville / entreprise</h3>
+        <p id="company-info">Chargement des informations...</p>
+      </div>
+
+      <p class="hint">
+        Ici, vous pourrez plus tard :
+        <br />– Voir la liste des problèmes signalés<br />
+        – Filtrer par service / localisation<br />
+        – Gérer le statut des problèmes (ouvert, en cours, résolu, etc.)
+      </p>
+
+      <div class="problems-block">
+        <h3>Problèmes signalés</h3>
+        <ul id="problems-list" class="problems-list">
+          <li>Chargement des problèmes...</li>
+        </ul>
+      </div>
+      
+    </section>
+  </main>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

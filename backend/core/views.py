@@ -1,7 +1,7 @@
 import json
 from django.http import JsonResponse, HttpResponseBadRequest, Http404
 from django.views.decorators.csrf import csrf_exempt
-
+from django.views.decorators.http import require_GET
 from .models import Companhia, Usuario, Servico, Localizacao, Problema
 
 
@@ -301,26 +301,140 @@ def criar_problema(request):
     })
 
 
+@csrf_exempt
 def obter_problema(request, problema_id):
     try:
         problema = Problema.objects.get(id=problema_id)
     except Problema.DoesNotExist:
         raise Http404("Problema não encontrado")
 
+    if request.method == "GET":
+        # 🔹 Lecture (comme avant)
+        return JsonResponse({
+            "id": problema.id,
+            "titulo": problema.titulo,
+            "companhia_id": problema.companhia.id if problema.companhia else None,
+            "servico_id": problema.servico.id if problema.servico else None,
+            "criado_por_id": problema.criado_por.id if problema.criado_por else None,
+            "descricao": problema.descricao,
+            "status": problema.status,
+            "prioridade": problema.prioridade,
+            "origem": problema.origem,
+            "localizacao_id": problema.localizacao.id if problema.localizacao else None,
+            "link_relacionado": problema.link_relacionado,
+            "fotos": problema.fotos,
+            "metadados": problema.metadados,
+            "data_registro": problema.data_registro,
+            "data_ultima_atualizacao": problema.data_ultima_atualizacao,
+        })
+
+    elif request.method in ("PUT", "PATCH"):
+        # 🔹 Mise à jour
+        try:
+            body = json.loads(request.body)
+        except:
+            return HttpResponseBadRequest("JSON invalide")
+
+        champs_editables = [
+            "titulo",
+            "descricao",
+            "status",
+            "prioridade",
+            "origem",
+            "link_relacionado",
+        ]
+
+        for champ in champs_editables:
+            if champ in body:
+                setattr(problema, champ, body[champ])
+
+        problema.save()
+
+        return JsonResponse({
+            "id": problema.id,
+            "titulo": problema.titulo,
+            "companhia_id": problema.companhia.id if problema.companhia else None,
+            "servico_id": problema.servico.id if problema.servico else None,
+            "criado_por_id": problema.criado_por.id if problema.criado_por else None,
+            "descricao": problema.descricao,
+            "status": problema.status,
+            "prioridade": problema.prioridade,
+            "origem": problema.origem,
+            "localizacao_id": problema.localizacao.id if problema.localizacao else None,
+            "link_relacionado": problema.link_relacionado,
+            "fotos": problema.fotos,
+            "metadados": problema.metadados,
+            "data_registro": problema.data_registro,
+            "data_ultima_atualizacao": problema.data_ultima_atualizacao,
+        })
+
+    else:
+        return HttpResponseBadRequest("Méthode non supportée")
+
+    
+@require_GET
+def listar_problemas(request):
+    """
+    Liste les problèmes, éventuellement filtrés par companhia_id.
+    GET /api/problemas/listar/
+    GET /api/problemas/listar/?companhia_id=1
+    """
+    companhia_id = request.GET.get("companhia_id")
+
+    qs = Problema.objects.all().select_related("companhia", "servico", "criado_por", "localizacao")
+    if companhia_id:
+        qs = qs.filter(companhia_id=companhia_id)
+
+    qs = qs.order_by("-data_registro")[:50]  # limite pour le projet
+
+    data = []
+    for p in qs:
+        data.append({
+            "id": p.id,
+            "titulo": p.titulo,
+            "descricao": p.descricao,
+            "status": p.status,
+            "prioridade": p.prioridade,
+            "origem": p.origem,
+            "companhia_id": p.companhia.id if p.companhia else None,
+            "servico_id": p.servico.id if p.servico else None,
+            "criado_por_id": p.criado_por.id if p.criado_por else None,
+            "localizacao_id": p.localizacao.id if p.localizacao else None,
+            "data_registro": p.data_registro,
+            "data_ultima_atualizacao": p.data_ultima_atualizacao,
+        })
+
+    return JsonResponse(data, safe=False)
+    
+# ============================
+# LOGIN
+# ============================
+@csrf_exempt
+def login_usuario(request):
+    if request.method != "POST":
+        return HttpResponseBadRequest("Méthode non supportée")
+
+    try:
+        body = json.loads(request.body)
+    except:
+        return HttpResponseBadRequest("JSON invalide")
+
+    email = body.get("email")
+    senha = body.get("senha")  # ou senha_hash
+
+    if not email or not senha:
+        return HttpResponseBadRequest("Email et mot de passe obligatoires")
+
+    try:
+        # ⚠️ Exemple naïf : à remplacer par un vrai hash
+        usuario = Usuario.objects.get(email=email, senha_hash=senha)
+    except Usuario.DoesNotExist:
+        return HttpResponseBadRequest("Identifiants invalides")
+
     return JsonResponse({
-        "id": problema.id,
-        "titulo": problema.titulo,
-        "companhia_id": problema.companhia.id,
-        "servico_id": problema.servico.id,
-        "criado_por_id": problema.criado_por.id if problema.criado_por else None,
-        "descricao": problema.descricao,
-        "status": problema.status,
-        "prioridade": problema.prioridade,
-        "origem": problema.origem,
-        "localizacao_id": problema.localizacao.id if problema.localizacao else None,
-        "link_relacionado": problema.link_relacionado,
-        "fotos": problema.fotos,
-        "metadados": problema.metadados,
-        "data_registro": problema.data_registro,
-        "data_ultima_atualizacao": problema.data_ultima_atualizacao,
+        "id": usuario.id,
+        "nome": usuario.nome,
+        "email": usuario.email,
+        "companhia_id": usuario.companhia.id if usuario.companhia else None,
+        "cargo": usuario.cargo,
     })
