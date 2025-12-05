@@ -1,264 +1,88 @@
-🇵🇹 README — Projeto Django + SQLite + API de Companhias
+# Backend – Como rodar / How to run
 
-Este projeto utiliza Django e SQLite para criar uma API simples que permite:
+## 🇧🇷 Como rodar o backend (Django)
 
-Criar uma companhia
+### 1. Ir até a pasta do backend
 
-Consultar uma companhia
+No terminal, vá até a pasta onde está o `manage.py`:
 
-Gerenciar todas as tabelas via Django Admin
+```bash
+cd /caminho/para/seu/projeto/backend
+```
 
-Trabalhar com modelos baseados em UUID
+### 2. Ativar o ambiente virtual (se existir)
+Se você criou um .venv:
+```bash
+source .venv/bin/activate   # macOS / Linux
+# .venv\Scripts\activate    # Windows
+```
+Se ainda não existe, você pode criar rapidamente:
 
-Usar uma base de dados SQLite incluída no repositório
-
-📦 1. Requisitos
-
-Python 3.10+ instalado
-
-pip atualizado
-
-Virtualenv recomendado
-
-🛠 2. Instalação
-macOS / Linux
-cd backend
-c
-source .venv/bin/activate
-pip install --upgrade pip
-pip install django
-
-Windows (PowerShell)
-cd backend
+```bash
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install django
-
-🚀 3. Inicializar o projeto (já feito)
-
-O projeto contém:
-
-backend/
- ├── backend/
- ├── core/
- ├── db.sqlite3
- ├── manage.py
- └── README.md
-
-🧩 4. Modelos existentes
-
-O projeto inclui modelos para:
-
-Companhia
-
-Usuario
-
-Servico
-
-Localizacao
-
-Problema
-
-Com chaves primárias em UUID e timestamps automáticos.
-
-🔧 5. Migrações (caso necessário)
-python manage.py makemigrations
-python manage.py migrate
-
-🔐 6. Criar um superusuário (para acessar o Admin)
-python manage.py createsuperuser
-
-🖥 7. Executar o servidor Django
-python manage.py runserver
-
-
-Acesse:
-
-👉 Django Admin:
-http://127.0.0.1:8000/admin
-
-🌐 8. Rotas da API
-➤ Criar uma companhia
-
-POST /companhias/
-
-Exemplo de JSON:
-
-{
-  "nome": "JUWA",
-  "cnpj": "12345678900011",
-  "endereco": "São Paulo"
-}
-
-➤ Obter uma companhia
-
-GET /companhias/<uuid>/
-
-Exemplo:
-
-http://127.0.0.1:8000/companhias/5c2b1ac0-55f4-4f11-a0c2-eaa5a606ed43/
-
-🗂 9. Estrutura de diretórios
-backend/
- ├── backend/
- │     ├── settings.py
- │     ├── urls.py
- │     └── wsgi.py
- ├── core/
- │     ├── models.py
- │     ├── views.py
- │     ├── admin.py
- │     ├── urls.py
- │     └── migrations/
- ├── db.sqlite3
- ├── manage.py
- └── README.md
-
-🛠 10. Comandos úteis
-
-Criar app:
-
-python manage.py startapp core
-
-
-Ver rotas:
-
-python manage.py show_urls
-
-
-Executar shell Django:
-
-python manage.py shell
-
-🇬🇧 README — Django + SQLite + Companies API
-
-This project uses Django and SQLite to build a simple API that allows:
-
-Creating a company
-
-Retrieving a company
-
-Managing all tables through Django Admin
-
-Using UUID-based primary keys
-
-Including the SQLite DB directly in the repository
-
-📦 1. Requirements
-
-Python 3.10+ installed
-
-Up-to-date pip
-
-Virtualenv recommended
-
-🛠 2. Installation
-macOS / Linux
-cd backend
-python3 -m venv .venv
 source .venv/bin/activate
-pip install --upgrade pip
-pip install django
-
-Windows (PowerShell)
-cd backend
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install django
-
-🚀 3. Project Structure
-backend/
- ├── backend/
- ├── core/
- ├── db.sqlite3
- ├── manage.py
- └── README.md
-
-🧩 4. Available Models
-
-The project includes models for:
-
-Company
-
-User
-
-Service
-
-Location
-
-Problem
-
-All using UUID primary keys and automatic timestamps.
-
-🔧 5. Database Migrations
-
-(if needed)
-
-python manage.py makemigrations
+pip install django django-cors-headers
+```
+### 3. Aplicar migrações (primeira vez)
+```bash
 python manage.py migrate
+```
 
-🔐 6. Create a Superuser (Admin Access)
-python manage.py createsuperuser
-
-🖥 7. Start Django Server
+### 4. Rodar o servidor de desenvolvimento
+```bash
 python manage.py runserver
+```
 
+O backend estará disponível em:
 
-Admin Panel:
+http://localhost:8000/
+A API estará em URLs como:
 
-👉 http://127.0.0.1:8000/admin
+http://localhost:8000/api/login/
 
-🌐 8. API Routes
-➤ Create a Company
+http://localhost:8000/api/problemas/
 
-POST /companhias/
+http://localhost:8000/api/problemas/<id>/
 
-Body example:
+## 🇬🇧 How to run the backend (Django)
+ 
+### 1. Go to the backend folder
+In the terminal, go to the folder where manage.py is located:
 
-{
-  "nome": "JUWA",
-  "cnpj": "12345678900011",
-  "endereco": "Paris"
-}
+```bash
+cd /path/to/your/project/backend
+```
+### 2. Activate the virtual environment (if it exists)
+If you created a .venv:
 
-➤ Get a Company
+```bash
+source .venv/bin/activate   # macOS / Linux
+# .venv\Scripts\activate    # Windows
+```
+If it doesn’t exist yet, you can quickly create it:
 
-GET /companhias/<uuid>/
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install django django-cors-headers
+```
 
-Example:
+### 3. Apply migrations (first time)
+```bash
+python manage.py migrate
+```
 
-http://127.0.0.1:8000/companhias/5c2b1ac0-55f4-4f11-a0c2-eaa5a606ed43/
+### 4. Run the development server
+```bash
+python manage.py runserver
+```
+The backend will be available at:
 
-🗂 9. Directory Structure
-backend/
- ├── backend/
- │     ├── settings.py
- │     ├── urls.py
- │     └── wsgi.py
- ├── core/
- │     ├── models.py
- │     ├── views.py
- │     ├── admin.py
- │     ├── urls.py
- │     └── migrations/
- ├── db.sqlite3
- ├── manage.py
- └── README.md
+http://localhost:8000/
+The API will respond on URLs such as:
 
-🛠 10. Useful Commands
+http://localhost:8000/api/login/
 
-Create a new app:
+http://localhost:8000/api/problemas/
 
-python manage.py startapp core
-
-
-List all routes:
-
-python manage.py show_urls
-
-
-Open Django shell:
-
-python manage.py shell
+http://localhost:8000/api/problemas/<id>/
