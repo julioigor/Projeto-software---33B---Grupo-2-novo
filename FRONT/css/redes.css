@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #e5e7eb;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+/* Header */
+header {
+    border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0 12px;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #22c55e;
+    display: inline-block;
+}
+
+.btn-outline {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    font-size: 0.9rem;
+    background: transparent;
+    color: #e5e7eb;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-outline:hover {
+    background: #e5e7eb;
+    color: #0f172a;
+}
+
+/* Subnav */
+.subnav {
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    display: flex;
+    gap: 12px;
+}
+
+.subnav a {
+    color: #9ca3af;
+}
+
+.subnav a:hover {
+    color: #e5e7eb;
+    text-decoration: underline;
+}
+
+main {
+    flex: 1;
+}
+
+.page-title {
+    font-size: clamp(2rem, 3vw, 2.4rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.page-subtitle {
+    font-size: 0.98rem;
+    color: #cbd5f5;
+    max-width: 560px;
+    margin-bottom: 20px;
+}
+
+.page-section {
+    padding: 32px 0 40px;
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+@media (max-width: 768px) {
+    .social-grid {
+    grid-template-columns: 1fr;
+    }
+}
+
+.social-card {
+    background: rgba(15, 23, 42, 0.95);
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.social-name {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+}
+
+.social-handle {
+    font-size: 0.85rem;
+    color: #cbd5f5;
+    margin-bottom: 8px;
+}
+
+.social-desc {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    margin-bottom: 10px;
+}
+
+.social-link {
+    font-size: 0.8rem;
+    color: #60a5fa;
+    text-decoration: underline;
+}
+
+.note {
+    margin-top: 18px;
+    font-size: 0.78rem;
+    color: #9ca3af;
+}
+
+footer {
+    border-top: 1px solid rgba(148, 163, 184, 0.3);
+    padding: 10px 0 14px;
+    font-size: 0.78rem;
+    color: #9ca3af;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contato - Plataforma Cidadã</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/contato.css" />    
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">
+          <span class="logo-badge"></span>
+          Plataforma Cidadã
+        </div>
+        <a href="Connexion.html">
+          <button class="btn-outline">Entrar</button>
+        </a>
+      </nav>
+      <div class="subnav">
+        <a href="landing.html">Início</a>
+        <a href="contato.html">Contato</a>
+        <a href="redes.html">Redes sociais</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero-grid">
+      <div>
+        <h1 class="page-title">Fale conosco</h1>
+        <p class="page-subtitle">
+          Esta é uma página de contato fictícia para o projeto acadêmico.
+          Nenhuma mensagem será enviada de verdade.
+        </p>
+        <p class="page-text">
+          Use este espaço para mostrar como seria o fluxo real de contato entre
+          cidadãos, prefeituras e empresas. Em um produto real, este formulário
+          poderia abrir um chamado, enviar um e-mail para a equipe responsável
+          ou criar uma entrada na base de dados.
+        </p>
+      </div>
+
+      <aside class="contact-card">
+        <h2>Formulário de contato</h2>
+        <p>
+          Preencha os campos abaixo como se fosse entrar em contato com a equipe
+          da Plataforma Cidadã.
+        </p>
+
+        <form
+          onsubmit="event.preventDefault(); alert('Obrigado! Este é apenas um formulário de demonstração.');"
+        >
+          <div class="form-group">
+            <label for="nome">Nome completo</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              placeholder="Seu nome"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="voce@exemplo.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="tipo">Sou...</label>
+            <select id="tipo" name="tipo">
+              <option value="">Selecione uma opção</option>
+              <option value="cidadao">Cidadão</option>
+              <option value="prefeitura">Representante de prefeitura</option>
+              <option value="empresa">Empresa parceira</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mensagem">Mensagem</label>
+            <textarea
+              id="mensagem"
+              name="mensagem"
+              placeholder="Descreva sua dúvida, sugestão ou comentário..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">Enviar mensagem</button>
+
+          <p class="form-note">
+            * Este formulário é apenas ilustrativo e não envia dados reais.
+          </p>
+        </form>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2025 Plataforma Cidadã — Página de contato fictícia para fins acadêmicos.
+    </div>
+  </footer>
+</body>
+</html>
